@@ -1,21 +1,14 @@
 #include <iostream>
 #include <windows.h>
-#include <wchar.h>
+#include <cstdio>
 #include <tchar.h>
-#ifdef UNICODE
-#define SetWindowText  SetWindowTextW
-#else
-#define SetWindowText  SetWindowTextA
-#endif
+#include <cstring>
 
-//this is a global because I want to std::cout it in the changeWindowName function.
-wchar_t *msg = L"hey fam"; //change this to your liking
-
-
-int changeWindowName(wchar_t *msg = nullptr)
+int changeWindowName(LPCSTR msg)
 {
-    typedef std::basic_string<wchar_t*> wstring;
     HWND steam;
+    //char *msg = "hey fam"; //change this to your liking
+
                                     //any window name here, it's case sensitive and needs to be precise.
     steam = FindWindow(nullptr, _T("LtdBoomer™ - Chat"));//checks if chat is open with boomer
 
@@ -27,14 +20,18 @@ int changeWindowName(wchar_t *msg = nullptr)
             steam = FindWindow(nullptr, _T("LtdBoomer™ - Chat"));//checks if chat is open with boomer
             if(steam)
             {
-                //if we find the window                                 //this needs fixing, only displays hex
-                std::cout << "found the window. Its new name is: " << (wstring*)msg << std::endl;
+                //if we find the window
+               printf("found the window. Its new name is: ");
+               for(int i = 0; i < strlen(msg); i++)
+               {
+                   printf("msg");
+               }
                 break;
             }
         }
     }
 
-    SetWindowTextW(steam , msg);//sets the windowname to msg;
+    SetWindowTextA(steam , msg);//sets the windowname to msg;
     return 1;
 }
 
@@ -43,7 +40,13 @@ int changeWindowName(wchar_t *msg = nullptr)
 
 int main()
 {
-    changeWindowName(msg);
+    printf("name the application to your liking: ");
+    char* message = nullptr;
+    std::string text; std::cin >>text;
+
+    strcpy(message, text.c_str());
+
+    changeWindowName(message);
     //msg = nullptr;
     return 0;
 }
