@@ -4,34 +4,30 @@
 #include <tchar.h>
 #include <cstring>
 
-int changeWindowName(LPCSTR msg)
+int changeWindowName(const char* msg)
 {
     HWND steam;
-    //char *msg = "hey fam"; //change this to your liking
-
                                     //any window name here, it's case sensitive and needs to be precise.
     steam = FindWindow(nullptr, _T("LtdBoomer™ - Chat"));//checks if chat is open with boomer
 
     if(!steam)//if window not found, keep checking until it opens.
     {
-        std::cout << "could not find steam window\n";
+        printf("could not find steam window\n");
         while(!steam)
         {                                   //any window name here, it's case sensitive and needs to be precise.
             steam = FindWindow(nullptr, _T("LtdBoomer™ - Chat"));//checks if chat is open with boomer
-            if(steam)
+            if(steam)//window found
             {
-                //if we find the window
-               printf("found the window. Its new name is: ");
-               for(int i = 0; i < strlen(msg); i++)
-               {
-                   printf("msg");
-               }
+                printf("found the window. Its new name is: ");
+                printf("%s", msg);
+                printf("\n");
                 break;
             }
         }
     }
 
     SetWindowTextA(steam , msg);//sets the windowname to msg;
+    msg = nullptr;
     return 1;
 }
 
@@ -41,12 +37,9 @@ int changeWindowName(LPCSTR msg)
 int main()
 {
     printf("name the application to your liking: ");
-    char* message = nullptr;
-    std::string text; std::cin >>text;
+    std::string text; getline(std::cin,text);
 
-    strcpy(message, text.c_str());
-
-    changeWindowName(message);
-    //msg = nullptr;
+    changeWindowName(text.c_str());
+    //message = nullptr;
     return 0;
 }
