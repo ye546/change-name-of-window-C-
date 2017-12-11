@@ -17,9 +17,7 @@ int changeWindowName(const char* msg)
             steam = FindWindow(nullptr, _T("LtdBoomer™ - Chat"));//checks if chat is open with boomer
             if(steam)//window found
             {
-                printf("found the window. Its new name is: ");
-                printf("%s", msg);
-                printf("\n");
+                printf("found the window. Its new name is: %s\n", msg);
                 break;
             }
         }
