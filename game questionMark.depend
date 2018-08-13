@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1495325215 source:c:\users\anton\documents\codeblocks\game questionmark\main.cpp
-	<iostream>
-	<windows.h>
-	<cstdio>
-	<tchar.h>
-
